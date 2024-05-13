@@ -1,0 +1,16 @@
+<div class="min-h-screen">
+  <!-- Navbar -->
+  <Nav class="w-full h-fit px-6 py-2 bg-white shadow-md shadow-gray-200 flex flex-row items-center">
+    <h1 class="text-3xl font-bold w-fit mx-4 my-2">
+      {{ title }}
+    </h1>
+    <ul class="flex flex-row ml-4 space-x-8">
+      <li><a routerLink="/">Home</a></li>
+      <li><a routerLink="/data">Data</a></li>
+    </ul>
+  </Nav>
+  <!-- Navbar end -->
+  <main class="mt-6 mx-6">
+    <router-outlet></router-outlet>
+  </main>
+</div>

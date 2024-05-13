@@ -1,0 +1,14 @@
+<div class="mx-2">
+  <div class="my-2">
+    <h4 class="font-medium text-xl">Test API</h4>
+    <p class="text-lg">Fetches data from "jsonplaceholder.typicode.com/posts"</p>
+  </div>
+  <ul>
+    @for( post of data; track post.id){
+    <li class="my-1">
+      <h3 class="font-medium text-lg">{{ post.title }}</h3>
+      <p>{{ post.body }}</p>
+    </li>
+    }
+  </ul>
+</div>
