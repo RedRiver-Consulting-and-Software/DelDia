@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit {
   }
 
   private fetchBoards(): void {
-    this.boardService.getBoards()
+    this.boardService.getAllBoards()
     .subscribe({
       next: (data: any) => {
         console.log(data);

@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Server.Data;
-using Server.Model;
+using Server.DTO;
+using Server.Services;
+using Server.Models;
 
 namespace Server.Controllers
 {
@@ -10,30 +13,48 @@ namespace Server.Controllers
     public class BoardsController : ControllerBase
     {
         private readonly ApplicationDBContext _db;
+        private readonly BoardService _boardService;
 
-        public BoardsController(ApplicationDBContext db)
+        public BoardsController(ApplicationDBContext dbContext, BoardService boardService)
         {
-            _db = db;
+            _db = dbContext;
+            _boardService = boardService;
         }
 
         /* BOARDS */
         //GET  /api/boards - Get All Boards
         [HttpGet]
-        public IActionResult GetBoards()
+        public async Task<ActionResult<List<BoardDTO>>> GetBoards()
         {
-            var boardData = _db.Boards.ToList();
-
-            //Validation - 404
-            if (boardData == null || boardData.Count == 0) // Check if boardData is null or empty
+            var boards = await _db.Boards.Include(b => b.Lists).ThenInclude(l => l.Cards).ToListAsync();
+            if (boards == null)
             {
                 return NotFound();
             }
 
-            return Ok(boardData); // Returns HTTP 200 OK response with boardData
+            var boardDTOs = boards.Select(board => _boardService.MapBoardToDTO(board)).ToList();
+            return Ok(boardDTOs);
         }
 
-        //POST /api/boards - Create a Board
+
         //GET /api/boards/{id} - Get Board by ID
+        [HttpGet("{id}")]
+        public async Task<ActionResult<BoardDTO>> GetBoard(int id)
+        {
+            var board = await _db.Boards
+                                 .Include(b => b.Lists)
+                                     .ThenInclude(l => l.Cards)
+                                 .SingleOrDefaultAsync(b => b.Id == id);
+            if (board != null)
+            {
+                var boardDTO = _boardService.MapBoardToDTO(board);
+                return Ok(boardDTO);
+            }
+            return NotFound();
+        }
+
+
+        //POST /api/boards - Create a Board
         //PUT /api/boards/{id} - Update a Board
         //DELETE /api/boards/{id} - Deleta a Board
 

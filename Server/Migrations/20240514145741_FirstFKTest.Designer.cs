@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Server.Data;
 
@@ -11,9 +12,11 @@ using Server.Data;
 namespace Server.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240514145741_FirstFKTest")]
+    partial class FirstFKTest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,15 +58,10 @@ namespace Server.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ListId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ListId");
 
                     b.ToTable("Cards");
                 });
@@ -92,16 +90,6 @@ namespace Server.Migrations
                     b.ToTable("Lists");
                 });
 
-            modelBuilder.Entity("Server.Models.Card", b =>
-                {
-                    b.HasOne("Server.Models.List", "List")
-                        .WithMany("Cards")
-                        .HasForeignKey("ListId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.Navigation("List");
-                });
-
             modelBuilder.Entity("Server.Models.List", b =>
                 {
                     b.HasOne("Server.Models.Board", "Board")
@@ -115,11 +103,6 @@ namespace Server.Migrations
             modelBuilder.Entity("Server.Models.Board", b =>
                 {
                     b.Navigation("Lists");
-                });
-
-            modelBuilder.Entity("Server.Models.List", b =>
-                {
-                    b.Navigation("Cards");
                 });
 #pragma warning restore 612, 618
         }

@@ -12,8 +12,15 @@ export class BoardService {
 
   constructor(private http: HttpClient) { }
 
-  getBoards(): Observable<IBoardModel[]> {
+  getAllBoards(): Observable<IBoardModel[]> {
     return this.http.get<IBoardModel[]>('http://localhost:5233/api/Boards')
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  getBoardById(id: number): Observable<IBoardModel> {
+    return this.http.get<IBoardModel>(`http://localhost:5233/api/Boards/${id}`)
       .pipe(
         catchError(this.handleError)
       );

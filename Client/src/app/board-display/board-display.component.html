@@ -1,7 +1,67 @@
-<p>board-display works!<span class="font-medium"> Board route: {{ boardId }}</span></p>
+<div class="flex gap-6">
+  <p class="font-medium">Board route: {{ boardId }}</p>
+  <div *ngIf="board">
+    <p>{{ board.title }}. {{ board.description }}</p>
+    <br>
 
-<div class="flex">
-  <app-board-list></app-board-list>
+    <div class="flex gap-4">
 
-  <app-board-list></app-board-list>
+      <!-- List Start -->
+      @for( list of board.lists; track list.id){
+
+      <div class="flex flex-col bg-white rounded shadow-md p-4 gap-4">
+        <div class="flex justify-between">
+          <h2>{{ list.title }}</h2>
+          <div class="h-[12px] w-[12px] cursor-pointer">
+            ...
+          </div>
+        </div>
+
+
+        <!-- Cards start -->
+        <div class="flex flex-col gap-4">
+          @for( card of list.cards; track card.id){
+
+          <div class="w-[250px] bg-gray-100 rounded-md px-6 py-4 cursor-pointer">
+            <h4 class="font-medium">{{ card.title }}</h4>
+            <p>{{ card.description }}</p>
+          </div>
+          }
+        </div>
+        <!-- Cards end -->
+
+        <div class="mt-auto cursor-pointer">Add New...</div>
+      </div>
+      }
+      <!-- Lists end -->
+    </div>
+  </div>
+
+  <!-- If board is Null -->
+  <div *ngIf="!board">
+    <p>Board is empty.</p>
+  </div>
+
+
+  <!-- <div class="example-container">
+  <h2>To do</h2>
+
+  <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="[doneList]"
+    class="example-list" (cdkDropListDropped)="drop($event)">
+    @for (item of todo; track item) {
+    <div class="example-box" cdkDrag>{{item}}</div>
+    }
+  </div>
+</div>
+
+<div class="example-container">
+  <h2>Done</h2>
+
+  <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[todoList]"
+    class="example-list" (cdkDropListDropped)="drop($event)">
+    @for (item of done; track item) {
+    <div class="example-box" cdkDrag>{{item}}</div>
+    }
+  </div>
+</div> -->
 </div>

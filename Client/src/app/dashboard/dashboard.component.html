@@ -10,7 +10,7 @@
   <div class="flex flex-wrap">
     @for( board of boardData; track board.id){
 
-    <a [routerLink]="['/board', board.link]" class="w-1/4 m-4 bg-white rounded overflow-hidden shadow-lg">
+    <a [routerLink]="['/board', board.id]" class="w-1/4 m-4 bg-white rounded overflow-hidden shadow-lg">
 
       <div class="px-6 py-4">
         <h4 class="font-bold text-xl mb-2">{{ board.title }}</h4>
