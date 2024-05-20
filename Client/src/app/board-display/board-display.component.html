@@ -1,67 +1,57 @@
-<div class="flex gap-6">
-  <p class="font-medium">Board route: {{ boardId }}</p>
+<div class="flex flex-row gap-6 w-full">
+  <!-- <p class="font-medium">Board route: {{ boardId }}</p> -->
   <div *ngIf="board">
     <p>{{ board.title }}. {{ board.description }}</p>
     <br>
-
-    <div class="flex gap-4">
-
+    <div cdkDropList cdkDropListOrientation="horizontal" [id]="'list-' + board.id" [cdkDropListData]="board.lists"
+      (cdkDropListDropped)="dropGroup($event)">
       <!-- List Start -->
-      @for( list of board.lists; track list.id){
+      <div class="dragdropList-list flex gap-4 flex-row pr-4 pb-4">
+        <div *ngFor="let list of board.lists" cdkDropListGroup cdkDragLockAxis="x" [cdkDragData]="board.lists" class="dragdropList-listBox flex flex-col bg-white
+        rounded shadow-md p-4 gap-4" cdkDrag>
 
-      <div class="flex flex-col bg-white rounded shadow-md p-4 gap-4">
-        <div class="flex justify-between">
-          <h2>{{ list.title }}</h2>
-          <div class="h-[12px] w-[12px] cursor-pointer">
-            ...
+          <div class="flex justify-between">
+            <h2>{{ list.title }}</h2>
+            <div class="flex gap-3">
+              <div
+                class="p-1 text-gray-500 cursor-move self-center justify-self-center hover:bg-slate-100 hover:text-black hover:rounded"
+                cdkDragHandle>
+                <app-svg icon="dragH" class="w-6 h-6"></app-svg>
+              </div>
+              <div
+                class="p-1 text-gray-500 cursor-pointer self-center justify-self-center hover:bg-slate-100 hover:text-black hover:rounded">
+                <app-svg icon="dotsH" class="w-6 h-6"></app-svg>
+              </div>
+            </div>
           </div>
-        </div>
 
+          <!-- Cards start -->
+          <div class="flex flex-col gap-4 flex-grow" cdkDropList [id]="'list-' + list.id" [cdkDropListData]="list.cards"
+            (cdkDropListDropped)="dropCard($event)" [cdkDropListConnectedTo]="getConnectedList()">
 
-        <!-- Cards start -->
-        <div class="flex flex-col gap-4">
-          @for( card of list.cards; track card.id){
+            <div *ngFor="let card of list.cards" cdkDrag [cdkDragData]="card"
+              class="bg-gray-100 rounded-md px-6 py-4 cursor-pointer hover:shadow-md">
+              <h4 class="font-medium">{{ card.title }}</h4>
+              <p>{{ card.description }}</p>
+            </div>
 
-          <div class="w-[250px] bg-gray-100 rounded-md px-6 py-4 cursor-pointer">
-            <h4 class="font-medium">{{ card.title }}</h4>
-            <p>{{ card.description }}</p>
           </div>
-          }
-        </div>
-        <!-- Cards end -->
+          <!-- Cards end -->
 
-        <div class="mt-auto cursor-pointer">Add New...</div>
+          <div
+            class="flex mt-auto px-2 py-2 cursor-pointer rounded-md text-gray-500 hover:bg-slate-100 hover:text-gray-900">
+            <app-svg icon="addNew" class="mr-2 w-6 h-6 self-center justify-self-center" cdkDragHandle></app-svg>
+            <div>Add a new card</div>
+          </div>
+          <!-- Lists end -->
+        </div>
       </div>
-      }
-      <!-- Lists end -->
     </div>
+
+    <!-- If board is Null -->
+    <div *ngIf="!board">
+      <p>Board is empty.</p>
+    </div>
+
   </div>
-
-  <!-- If board is Null -->
-  <div *ngIf="!board">
-    <p>Board is empty.</p>
-  </div>
-
-
-  <!-- <div class="example-container">
-  <h2>To do</h2>
-
-  <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="[doneList]"
-    class="example-list" (cdkDropListDropped)="drop($event)">
-    @for (item of todo; track item) {
-    <div class="example-box" cdkDrag>{{item}}</div>
-    }
-  </div>
-</div>
-
-<div class="example-container">
-  <h2>Done</h2>
-
-  <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[todoList]"
-    class="example-list" (cdkDropListDropped)="drop($event)">
-    @for (item of done; track item) {
-    <div class="example-box" cdkDrag>{{item}}</div>
-    }
-  </div>
-</div> -->
 </div>

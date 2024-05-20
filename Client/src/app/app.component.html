@@ -1,20 +1,27 @@
 <div class="min-h-screen">
   <!-- Navbar -->
-  <Nav class="w-full h-fit px-6 py-2 bg-white shadow-md shadow-gray-300 flex flex-row items-center">
-    <div class="h-[25px] w-[25px]"><svg xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-        <path
-          d="M149.3 216v80c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24v-80c0-13.3 10.7-24 24-24h101.3c13.3 0 24 10.7 24 24zM0 376v80c0 13.3 10.7 24 24 24h101.3c13.3 0 24-10.7 24-24v-80c0-13.3-10.7-24-24-24H24c-13.3 0-24 10.7-24 24zM125.3 32H24C10.7 32 0 42.7 0 56v80c0 13.3 10.7 24 24 24h101.3c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24zm80 448H488c13.3 0 24-10.7 24-24v-80c0-13.3-10.7-24-24-24H205.3c-13.3 0-24 10.7-24 24v80c0 13.3 10.7 24 24 24zm-24-424v80c0 13.3 10.7 24 24 24H488c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24H205.3c-13.3 0-24 10.7-24 24zm24 264H488c13.3 0 24-10.7 24-24v-80c0-13.3-10.7-24-24-24H205.3c-13.3 0-24 10.7-24 24v80c0 13.3 10.7 24 24 24z" />
-      </svg></div>
-    <a routerLink="/">
-      <h1 class="text-2xl font-medium w-fit mx-4 my-2">
-        {{ title }}
-      </h1>
-    </a>
-    <ul class="flex flex-row ml-4 space-x-8">
-      <li><a routerLink="/">Dashboard</a></li>
-      <li><a routerLink="/data">API Test</a></li>
-    </ul>
+  <Nav class="w-full h-fit px-6 py-2 bg-white shadow-md shadow-gray-300 flex flex-row items-center justify-between">
+    <div class="flex items-center">
+      <!-- LOGO -->
+      <app-svg icon="logo"
+        class="w-6 h-6 text-gray-900 cursor-pointer self-center justify-self-center hover:text-purple-700 ">
+      </app-svg>
+      <a routerLink="/">
+        <h1 class="text-2xl font-medium w-fit mx-4 my-2">
+          {{ title }}
+        </h1>
+      </a>
+      <!-- Nav links -->
+      <ul class="flex flex-row ml-4 space-x-8">
+        <li><a routerLink="/" class="font-medium hover:text-purple-700">Dashboard</a></li>
+        <li><a routerLink="/data" class="font-medium hover:text-purple-700">API Test</a></li>
+      </ul>
+    </div>
+    <!-- Right area -->
+    <div class="flex items-center">
+      <app-svg icon="userCircle"
+        class="w-8 h-8 text-gray-700 cursor-pointer self-center justify-self-center hover:text-purple-700 "></app-svg>
+    </div>
   </Nav>
   <!-- Navbar end -->
   <main class="mt-6 mx-6">

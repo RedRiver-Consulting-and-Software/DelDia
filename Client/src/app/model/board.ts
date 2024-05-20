@@ -20,3 +20,15 @@ export interface IBoardModel {
   link: string;
   lists: IListModel[];
 }
+
+//TEST
+
+export interface Item {
+  name: string;
+}
+
+export interface Group {
+  id: string;
+  title: string;
+  items: Item[];
+}
