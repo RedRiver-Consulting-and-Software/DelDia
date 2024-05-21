@@ -42,7 +42,6 @@
     {
         public string? Title { get; set; }
         public string? ShortDescription { get; set; }
-        public int? BoardId { get; set; }
     }
 
     public class CardDTO
@@ -64,6 +63,5 @@
     {
         public string? Title { get; set; }
         public string? Description { get; set; }
-        public int? ListId { get; set; }
     }
 }
