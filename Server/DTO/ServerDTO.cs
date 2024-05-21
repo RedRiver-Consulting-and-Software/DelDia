@@ -1,6 +1,4 @@
-﻿using Server.Models;
-
-namespace Server.DTO
+﻿namespace Server.DTO
 {
     public class BoardDTO
     {

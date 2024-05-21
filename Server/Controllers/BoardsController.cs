@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.DTO;
 using Server.Services;
-using Server.Models;
 
 namespace Server.Controllers
 {
