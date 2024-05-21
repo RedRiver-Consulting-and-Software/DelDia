@@ -1,37 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.DTO;
+using Server.Exceptions;
 using Server.Services;
 
 namespace Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BoardsController : ControllerBase
+    public class BoardsController(ApplicationDBContext dbContext, BoardService boardService) : ControllerBase
     {
-        private readonly ApplicationDBContext _db;
-        private readonly BoardService _boardService;
-
-        public BoardsController(ApplicationDBContext dbContext, BoardService boardService)
-        {
-            _db = dbContext;
-            _boardService = boardService;
-        }
-
         /* BOARDS */
         //GET  /api/boards - Get All Boards
         [HttpGet]
         public async Task<ActionResult<List<BoardDTO>>> GetBoards()
         {
-            var boards = await _db.Boards.Include(b => b.Lists).ThenInclude(l => l.Cards).ToListAsync();
-            if (boards == null)
-            {
-                return NotFound();
-            }
+            var boards = await boardService.GetBoards();
+            return Ok(boards);
 
-            var boardDTOs = boards.Select(board => _boardService.MapBoardToDTO(board)).ToList();
-            return Ok(boardDTOs);
         }
 
 
@@ -39,23 +25,72 @@ namespace Server.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<BoardDTO>> GetBoard(int id)
         {
-            var board = await _db.Boards
-                                 .Include(b => b.Lists)
-                                     .ThenInclude(l => l.Cards)
-                                 .SingleOrDefaultAsync(b => b.Id == id);
-            if (board != null)
+
+            var board = await boardService.GetBoard(id);
+            if (board is null)
             {
-                var boardDTO = _boardService.MapBoardToDTO(board);
-                return Ok(boardDTO);
+                return NotFound();
             }
-            return NotFound();
+
+            return Ok(board);
+
+
         }
 
 
         //POST /api/boards - Create a Board
+        [HttpPost] 
+        public async Task<ActionResult<BoardDTO>> CreateBoard(AddBoardDTO model)
+        {
+            var board = await boardService.SaveBoard(model);
+            return Ok(board);
+        }
+        
+        
         //PUT /api/boards/{id} - Update a Board
+        [HttpPut("{id}")] 
+        public async Task<ActionResult<BoardDTO>> UpdateBoard(int id, UpdateBoardDTO model)
+        {
+            try
+            {
+                var updatedBoard = await boardService.UpdateBoard(id, model);
+                return Ok(updatedBoard);
+            }
+            catch (EntityNotFoundException ex)
+            {
+                return NotFound(new { Message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred while updating the board.", Details = ex.Message });
+            }
+        }
+        
         //DELETE /api/boards/{id} - Deleta a Board
-
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteBoard(int id)
+        {
+            try
+            {
+                var success = await boardService.DeleteBoard(id);
+                if (success)
+                {
+                    return NoContent();
+                }
+                return StatusCode(500, new { Message = "Failed to delete the board." });
+            }
+            catch (EntityNotFoundException ex)
+            {
+                return NotFound(new { Message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred while deleting the board.", Details = ex.Message });
+            }
+        }
+        
+        
+        
         /* LISTS */
         //POST /api/boards/{boardId}/lists - Create a list in a Board
         //GET /api/boards/{boardId}/lists - Get All lists in a Board
