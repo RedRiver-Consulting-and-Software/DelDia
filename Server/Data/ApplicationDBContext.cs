@@ -6,9 +6,9 @@ namespace Server.Data
     public class ApplicationDBContext : DbContext
     {
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options) { }
-        public DbSet<Board>? Boards { get; set; }
-        public DbSet<List>? Lists { get; set; }
-        public DbSet<Card>? Cards { get; set; }
+        public DbSet<Board> Boards => Set<Board>();
+        public DbSet<List> Lists => Set<List>();
+        public DbSet<Card> Cards => Set<Card>();
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

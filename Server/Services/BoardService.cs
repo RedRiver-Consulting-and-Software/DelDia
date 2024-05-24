@@ -1,39 +1,66 @@
-﻿using Server.DTO;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using Server.Data;
+using Server.DTO;
+using Server.Exceptions;
 using Server.Models;
-using System.Linq;
 
 namespace Server.Services
 {
-    public class BoardService
+    public class BoardService(ApplicationDBContext context, IMapper mapper)
     {
-        public BoardDTO? MapBoardToDTO(Board board)
+        public async Task<List<BoardDTO>> GetBoards()
         {
-            if (board == null)
+            var boards = await context.Boards.Include(b => b.Lists)!.ThenInclude(l => l.Cards).ToListAsync();
+
+            return mapper.Map<List<BoardDTO>>(boards);
+        }
+
+        public async Task<BoardDTO?> GetBoard(int id)
+        {
+            var board = await context.Boards.Include(b => b.Lists)!.ThenInclude(l => l.Cards)
+                .SingleOrDefaultAsync(b => b.Id == id);
+
+
+            return mapper.Map<BoardDTO>(board);
+        }
+
+        public async Task<BoardDTO> SaveBoard(AddBoardDTO board)
+        {
+            var boardEntity = mapper.Map<Board>(board);
+            context.Boards.Add(boardEntity);
+            await context.SaveChangesAsync();
+            return mapper.Map<BoardDTO>(boardEntity);
+        }
+
+        public async Task<BoardDTO?> UpdateBoard(int id, UpdateBoardDTO model)
+        {
+            var boardEntity = await context.Boards.SingleOrDefaultAsync(b => b.Id == id);
+            if (boardEntity == null)
             {
-                return null;
+                throw new EntityNotFoundException($"Board with ID {id} was not found.");
             }
 
-            return new BoardDTO
-            {
-                Id = board.Id,
-                Title = board.Title,
-                Description = board.Description,
-                Link = board.Link,
-                Lists = board.Lists?.Select(list => new ListDTO
-                {
-                    Id = list.Id,
-                    Title = list.Title,
-                    ShortDescription = list.ShortDescription,
-                    BoardId = list.BoardId,
-                    Cards = list.Cards?.Select(card => new CardDTO
-                    {
-                        Id = card.Id,
-                        Title = card.Title,
-                        Description = card.Description,
-                        ListId = card.ListId
-                    }).ToList()
-                }).ToList()
-            };
+            mapper.Map(model, boardEntity);
+
+            await context.SaveChangesAsync();
+
+            return mapper.Map<BoardDTO>(boardEntity);
         }
+
+        public async Task<bool> DeleteBoard(int id)
+        {
+            var boardEntity = await context.Boards.SingleOrDefaultAsync(b => b.Id == id);
+            if (boardEntity is null)
+            {
+                throw new EntityNotFoundException($"Board with ID {id} was not found.");
+            }
+
+            context.Remove(boardEntity);
+            await context.SaveChangesAsync();
+            return true;
+        }
+
+
     }
 }
