@@ -3,6 +3,8 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { SvgComponent } from "./components/svgs.component";
+import { TopNavbarComponent } from './components/top-navbar/top-navbar.component';
+import { SideMenuComponent } from './components/side-menu/side-menu.component';
 
 @Component({
     selector: 'app-root',
@@ -15,9 +17,11 @@ import { SvgComponent } from "./components/svgs.component";
         RouterLink,
         RouterLinkActive,
         HttpClientModule,
-        SvgComponent
+        SvgComponent,
+        TopNavbarComponent,
+        SideMenuComponent
     ]
 })
 export class AppComponent {
-  title: string = 'DelDia';
+
 }

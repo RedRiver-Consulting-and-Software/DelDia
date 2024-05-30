@@ -97,7 +97,7 @@ Ensure you have the following software installed on your machine:
    dotnet run
    ```
 
-   **In Visual Studio:** _F5 _(Start Debugging) or _Ctrl+F5_ (Start Without Debugging).
+   **In Visual Studio:** _F5_ (Start Debugging) or _Ctrl+F5_ (Start Without Debugging).
 
 2. Access the Swagger interface for the backend API: **[http://localhost:5233/swagger/index.html](http://localhost:5233/swagger/index.html)**
 

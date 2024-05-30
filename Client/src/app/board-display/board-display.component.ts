@@ -59,45 +59,6 @@ export class BoardDisplayComponent implements OnInit {
     );
   }
 
-  /**
-  [
-    {
-      "id": 1, //Group-1
-      "title": "List One",
-      "boardId": 5,
-      "cards": [ //items
-        {
-          "id": 1, //name
-          "title": "First Card",
-          "description": "This is the first Card.",
-          "listId": 1
-        },
-        {
-          "id": 2, //name
-          "title": "Second Card",
-          "description": "This is the second Card.",
-          "listId": 1
-        }
-      ]
-    },
-    {
-      "id": 2, //Group-2
-      "title": "List Two",
-      "boardId": 5,
-      "cards": [ //items
-        {
-          "id": 3, //name
-          "title": "Third Card",
-          "description": "This is the third Card.",
-          "listId": 2
-        }
-      ]
-    }
-  ]
-*/
-
-  //Test
-
   dropGroup(event: CdkDragDrop<IListModel[]>) {
     moveItemInArray(this.board!.lists, event.previousIndex, event.currentIndex);
     console.log('Moved the list');
