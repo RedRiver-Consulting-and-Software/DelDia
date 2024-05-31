@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { SvgComponent } from "../svgs.component";
 import { SvgLogoComponent } from '../logo-svg.component';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-top-navbar',

@@ -1,4 +1,51 @@
-<div class="flex flex-col bg-white m-2">
-  <h2>side-menu works!</h2>
-  <p>Nav item</p>
+<div class="flex bg-white">
+  <div class="flex flex-col mt-10 mr-10 2xl:mt-12 2xl:mr-14">
+
+    <p class="ml-8 font-medium">Menu</p>
+    <!-- First Link section-->
+    <div class="flex mt-4 mb-6 2xl:mt-6 2xl:mb-8">
+      <div class="flex w-8">
+        <div *ngIf="isHomeRoute" class="h-full w-[0.4rem] bg-iris rounded-tr-full rounded-br-full"></div>
+      </div>
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]={exact:true}
+        class="group flex items-center">
+        <div class="flex justify-center items-center w-6 h-6 mr-2">
+          <app-svg icon="home" class="group-hover:text-iris h-5 w-5 mb-1 2xl:h-6 2xl:w-6"></app-svg>
+        </div>
+        <div class="mr-4 2xl:mr-8 text-lg font-semibold group-hover:text-iris 2xl:font-bold 2xl:text-xl my-2">
+          Workspace
+        </div>
+      </a>
+    </div>
+
+    <!-- Second Link section - with accordion menu -->
+    <div class="flex">
+      <div class="flex w-8">
+        <div *ngIf="isBoardRoute" class="h-full w-[0.4rem] bg-iris rounded-tr-full rounded-br-full"></div>
+      </div>
+      <div (click)="toggleBoards()" [class.active]="isBoardRoute" class="group flex items-center cursor-pointer ">
+        <div class="flex justify-center items-center w-6 h-6 mr-3">
+          <app-svg icon="board" class="group-hover:text-iris h-[1.16rem] w-[1.16rem] 2xl:h-5 2xl:w-5"></app-svg>
+        </div>
+        <div
+          class="w-full group-hover:text-iris flex justify-between items-center text-lg font-semibold 2xl:font-bold 2xl:text-xl my-2">
+          Boards
+        </div>
+        <div class="transition-transform duration-300 ease-in-out" [ngClass]="{'-rotate-90': showBoards}">
+          <app-svg icon="arrowRight" class="h-5 w-5"></app-svg>
+        </div>
+      </div>
+    </div>
+    <!-- Shows the list of boards -->
+    <ul [ngClass]="{ 'max-h-0': !showBoards, 'max-h-[1000px]': showBoards }"
+      class="ml-8 overflow-hidden transition-max-height duration-200 ease-in-out">
+      <a *ngFor="let board of boards" [routerLink]="'/board/' + board.id" routerLinkActive="active"
+        class="flex items-center my-3">
+        <li
+          class="w-full pl-6 pr-2 py-2 text-base 2xl:text-lg font-semibold rounded-md hover:text-iris truncate max-w-[12rem] 2xl:max-w-[15rem]">
+          <span>{{ board.title }}</span>
+        </li>
+      </a>
+    </ul>
+  </div>
 </div>
