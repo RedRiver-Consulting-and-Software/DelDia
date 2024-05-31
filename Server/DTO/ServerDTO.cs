@@ -9,6 +9,11 @@
         public List<ListDTO>? Lists { get; set; }
     }
 
+    public class BoardsSummaryDTO
+    {
+        public int Id { get; set; }
+        public string? Title { get; set; }
+    }
     public class AddBoardDTO
     {
         public string? Title { get; set; }

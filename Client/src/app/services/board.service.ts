@@ -5,6 +5,11 @@ import { catchError } from 'rxjs/operators';
 //MODELS
 import { IBoardModel } from '../model/board';
 
+export interface BoardSummary {
+  id: number;
+  title: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,6 +22,10 @@ export class BoardService {
       .pipe(
         catchError(this.handleError)
       );
+  }
+
+  getBoardSummaries(): Observable<BoardSummary[]> {
+    return this.http.get<BoardSummary[]>('http://localhost:5233/api/Boards/Summary');
   }
 
   getBoardById(id: number): Observable<IBoardModel> {

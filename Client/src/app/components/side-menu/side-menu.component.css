@@ -1,0 +1,9 @@
+.active {
+  color: #9068ff;
+}
+
+a.active li {
+  background-color: #9068ff;
+  color: white;
+  pointer-events: none;
+}

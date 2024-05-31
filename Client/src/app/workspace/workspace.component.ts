@@ -3,11 +3,12 @@ import { IBoardModel } from '../model/board';
 import { BoardService } from '../services/board.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { SvgComponent } from '../components/svgs.component';
 
 @Component({
   selector: 'app-workspace',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, SvgComponent],
   templateUrl: './workspace.component.html',
   styleUrl: './workspace.component.css'
 })

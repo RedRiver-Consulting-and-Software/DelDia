@@ -1,7 +1,12 @@
 <div class="mt-10 ml-10 2xl:mt-12 2xl:ml-12">
   <h1 class="mb-2 text-2xl 2xl:text-4xl font-semibold">{{ pageTitle }}</h1>
   <p class="2xl:text-lg">{{ pageHeader }}</p>
-  <h4 class="mt-6 text-xl 2xl:text-[1.7rem] font-medium">{{ boardHeader }}</h4>
+
+  <div class="flex mt-6 items-center">
+    <app-svg icon="board" class="mr-2 h-[1.2rem] w-[1.2rem] 2xl:h-6 2xl:w-6 2xl:mr-3"></app-svg>
+    <h4 class=" text-[1.4rem] 2xl:text-[1.7rem] font-semibold">{{ boardHeader }}</h4>
+  </div>
+
   <div class="mt-4">
     <!-- If error -->
     <div *ngIf="errorMessage" class="error-message">
@@ -11,10 +16,10 @@
     <!-- If NOT error -->
     <div *ngIf="!errorMessage">
 
-      <div class="flex flex-wrap">
+      <div class="flex flex-wrap ml-7 2xl:ml-10 gap-6">
         @for( board of boardData; track board.id){
 
-        <a [routerLink]="['/board', board.id]" class="w-1/4 mx-2 bg-white rounded overflow-hidden shadow-lg">
+        <a [routerLink]="['/board', board.id]" class="w-1/4 bg-white rounded overflow-hidden shadow-lg">
 
           <div class="px-6 py-4">
             <h4 class="font-bold text-xl mb-2">{{ board.title }}</h4>

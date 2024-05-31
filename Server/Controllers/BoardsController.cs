@@ -10,13 +10,27 @@ namespace Server.Controllers
     public class BoardsController(BoardService boardService) : ControllerBase
     {
       
-        //GET  /api/boards - Get All Boards
+        //GET  /api/boards - Get All Boards 
         [HttpGet]
         public async Task<ActionResult<List<BoardDTO>>> GetBoards()
         {
             var boards = await boardService.GetBoards();
             return Ok(boards);
 
+        }
+
+        //GET  /api/boardsSummary - Get Boards ID & Title
+        [HttpGet("Summary")]
+        public async Task<ActionResult<List<BoardsSummaryDTO>>> GetBoardSummaries()
+        {
+            var boards = await boardService.GetBoards();
+            var boardSummaries = boards.Select(b => new BoardsSummaryDTO
+            {
+                Id = b.Id,
+                Title = b.Title
+            }).ToList();
+
+            return Ok(boardSummaries);
         }
 
 
