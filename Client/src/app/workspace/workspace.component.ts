@@ -5,15 +5,17 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-workspace',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  templateUrl: './workspace.component.html',
+  styleUrl: './workspace.component.css'
 })
-export class DashboardComponent implements OnInit {
+export class WorkspaceComponent implements OnInit {
 
+  pageTitle: string = 'Workspace';
   pageHeader: string = 'Choose a board or make a new one';
+  boardHeader: string = 'Boards';
 
   errorMessage: string = '';
   boardData: IBoardModel[] = [];
