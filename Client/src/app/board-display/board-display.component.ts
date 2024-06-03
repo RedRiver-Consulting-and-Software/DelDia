@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BoardService } from '../services/board.service';
-import { IBoardModel, IListModel, ICardModel } from '../model/board';
+import { IBoardModel, IListModel, ICardModel, NewListModel } from '../model/board';
 import { ActivatedRoute } from '@angular/router';
 import {
   CdkDragDrop,
@@ -11,23 +11,26 @@ import {
   CdkDropList,
   CdkDragHandle
 } from '@angular/cdk/drag-drop';
-import { SvgComponent } from "../components/svgs.component";
+import { SvgComponent } from '../components/svgs.component';
+import { NewListComponent } from '../new-list/new-list.component';
 
 @Component({
-    selector: 'app-board-display',
-    standalone: true,
-    templateUrl: './board-display.component.html',
-    styleUrls: ['./board-display.component.css'],
-    imports: [
-        CommonModule,
-        CdkDropList,
-        CdkDrag,
-        CdkDragHandle,
-        SvgComponent
-    ]
+  selector: 'app-board-display',
+  standalone: true,
+  templateUrl: './board-display.component.html',
+  styleUrls: ['./board-display.component.css'],
+  imports: [
+    CommonModule,
+    CdkDropList,
+    CdkDrag,
+    CdkDragHandle,
+    SvgComponent,
+    NewListComponent
+  ]
 })
 export class BoardDisplayComponent implements OnInit {
   board: IBoardModel | null = null;
+  boards: IBoardModel[] = [];
   error: string | null = null;
   boardId: string = '';
 
@@ -42,7 +45,6 @@ export class BoardDisplayComponent implements OnInit {
     });
   }
 
-  //Fetch
   private fetchBoardById(id: number): void {
     this.boardService.getBoardById(id).subscribe({
       next: (board: IBoardModel) => {
@@ -53,9 +55,62 @@ export class BoardDisplayComponent implements OnInit {
         this.board = null;
         this.error = 'Failed to fetch board: ' + error.message;
       }
-    }
-    );
+    });
   }
+
+  onBoardCreated(newBoard: IBoardModel): void {
+    this.boards.push(newBoard);
+  }
+
+  onListCreated(newList: NewListModel): void {
+    if (this.board) {
+      const newIListModel: IListModel = {
+        id: newList.id,
+        title: newList.title,
+        cards: []
+      };
+      this.board.lists.push(newIListModel);
+    }
+  }
+
+  /**
+  [
+    {
+      "id": 1, //Group-1
+      "title": "List One",
+      "boardId": 5,
+      "cards": [ //items
+        {
+          "id": 1, //name
+          "title": "First Card",
+          "description": "This is the first Card.",
+          "listId": 1
+        },
+        {
+          "id": 2, //name
+          "title": "Second Card",
+          "description": "This is the second Card.",
+          "listId": 1
+        }
+      ]
+    },
+    {
+      "id": 2, //Group-2
+      "title": "List Two",
+      "boardId": 5,
+      "cards": [ //items
+        {
+          "id": 3, //name
+          "title": "Third Card",
+          "description": "This is the third Card.",
+          "listId": 2
+        }
+      ]
+    }
+  ]
+*/
+
+  //Test
 
   dropGroup(event: CdkDragDrop<IListModel[]>) {
     moveItemInArray(this.board!.lists, event.previousIndex, event.currentIndex);

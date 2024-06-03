@@ -7,10 +7,12 @@ import { SvgComponent } from '../components/svgs.component';
 import { MatDialog } from '@angular/material/dialog';
 import { NewBoardModalComponent } from '../new-board-modal/new-board-modal.component';
 
+import { NewBoardComponent } from '../new-board/new-board.component';
+
 @Component({
   selector: 'app-workspace',
   standalone: true,
-  imports: [CommonModule, RouterModule, SvgComponent, NewBoardModalComponent],
+  imports: [CommonModule, RouterModule, SvgComponent, NewBoardComponent, NewBoardModalComponent],
   templateUrl: './workspace.component.html',
   styleUrl: './workspace.component.css'
 })
