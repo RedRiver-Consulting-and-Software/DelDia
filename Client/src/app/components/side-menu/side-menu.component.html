@@ -31,7 +31,8 @@
           class="w-full group-hover:text-iris flex justify-between items-center text-lg font-semibold 2xl:font-bold 2xl:text-xl my-2">
           Boards
         </div>
-        <div class="transition-transform duration-300 ease-in-out" [ngClass]="{'-rotate-90': showBoards}">
+        <div class="group-hover:text-iris transition-transform duration-300 ease-in-out"
+          [ngClass]="{'-rotate-90': showBoards}">
           <app-svg icon="arrowRight" class="h-5 w-5"></app-svg>
         </div>
       </div>
@@ -47,5 +48,5 @@
         </li>
       </a>
     </ul>
+
   </div>
-</div>

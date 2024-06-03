@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BoardService } from '../services/board.service';
-import { IBoardModel, IListModel, ICardModel, NewListModel } from '../model/board'; // Ensure this path is correct
+import { IBoardModel, IListModel, ICardModel, NewListModel } from '../model/board';
 import { ActivatedRoute } from '@angular/router';
 import {
   CdkDragDrop,

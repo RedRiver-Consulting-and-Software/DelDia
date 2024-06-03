@@ -1,0 +1,24 @@
+<div class="py-9 px-7 min-w-[14rem] bg-[#FCFCFC]">
+  <h2 class="flex justify-center items-center text-xl font-bold">Create a new board</h2>
+  <div class="pb-2 pt-5 w-[16rem]">
+    <p class="font-semibold text-black text-[0.9rem] mb-1">Board name <span class="text-red-600">*</span></p>
+    <mat-form-field class="w-full">
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="data.title">
+    </mat-form-field>
+    <p class="font-semibold text-[0.9rem] mb-1">Board description (Optional)</p>
+    <mat-form-field class="w-full">
+      <mat-label>Description</mat-label>
+      <input matInput [(ngModel)]="data.description">
+    </mat-form-field>
+  </div>
+  <div class="flex flex-col gap-4">
+    <div [mat-dialog-close]="data"
+      class="py-3 px-6 w-full flex justify-center items-center bg-iris text-white rounded-md font-semibold cursor-pointer hover:bg-royalBlue">
+      Create Board
+    </div>
+    <div (click)="onCancel()"
+      class="py-3 px-6 w-full flex justify-center items-center rounded-md bg-white border-[1.8px] border-darkGray text-darkGray font-semibold cursor-pointer hover:text-royalBlue hover:border-royalBlue">
+      Cancel</div>
+  </div>
+</div>

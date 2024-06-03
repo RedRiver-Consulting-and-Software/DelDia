@@ -3,11 +3,12 @@ import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/ro
 import { BoardService, BoardSummary } from '../../services/board.service';
 import { CommonModule } from '@angular/common';
 import { SvgComponent } from '../../components/svgs.component';
+import { WorkspaceComponent } from '../../workspace/workspace.component';
 
 @Component({
   selector: 'app-side-menu',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, CommonModule, SvgComponent],
+  imports: [RouterLink, RouterLinkActive, CommonModule, SvgComponent, WorkspaceComponent],
   templateUrl: './side-menu.component.html',
   styleUrl: './side-menu.component.css'
 })
@@ -17,6 +18,7 @@ export class SideMenuComponent {
 
   isHomeRoute: boolean = false;
   isBoardRoute: boolean = false;
+  opened = true;
 
   constructor(private boardService: BoardService, private router: Router) {}
 
@@ -40,5 +42,4 @@ export class SideMenuComponent {
   toggleBoards(): void {
     this.showBoards = !this.showBoards;
   }
-
 }
