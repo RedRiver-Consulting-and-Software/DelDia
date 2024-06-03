@@ -17,6 +17,7 @@ export class BoardService {
 
   constructor(private http: HttpClient) { }
 
+  //GET - All Boards, list and cards
   getAllBoards(): Observable<IBoardModel[]> {
     return this.http.get<IBoardModel[]>('http://localhost:5233/api/Boards')
       .pipe(
@@ -24,12 +25,22 @@ export class BoardService {
       );
   }
 
+  //GET - Get board summary (id & title)
   getBoardSummaries(): Observable<BoardSummary[]> {
     return this.http.get<BoardSummary[]>('http://localhost:5233/api/Boards/Summary');
   }
 
+  //GET - Get board with id
   getBoardById(id: number): Observable<IBoardModel> {
     return this.http.get<IBoardModel>(`http://localhost:5233/api/Boards/${id}`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  //POST - Create a new board
+  createBoard(boardData: any): Observable<IBoardModel> {
+    return this.http.post<IBoardModel>('http://localhost:5233/api/Boards', boardData)
       .pipe(
         catchError(this.handleError)
       );

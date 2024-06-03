@@ -1,4 +1,4 @@
-<div class="mt-10 ml-10 2xl:mt-12 2xl:ml-12">
+<div class="mt-10 mx-10 2xl:mt-12 2xl:mx-12">
   <h1 class="mb-2 text-2xl 2xl:text-4xl font-semibold">{{ pageTitle }}</h1>
   <p class="2xl:text-lg">{{ pageHeader }}</p>
 
@@ -9,8 +9,8 @@
 
   <div class="mt-4">
     <!-- If error -->
-    <div *ngIf="errorMessage" class="error-message">
-      <p class="font-medium">{{ errorMessage }}</p>
+    <div *ngIf="errorMessage" class="error-message" class="m-7">
+      <p class="font-medium text-red-700">{{ errorMessage }}</p>
     </div>
 
     <!-- If NOT error -->
@@ -27,10 +27,9 @@
               {{ board.description }}
             </p>
           </div>
-
         </a>
-
         }
+        <div (click)="openModal()" class="cursor-pointer">Create a New Board</div>
       </div>
     </div>
   </div>

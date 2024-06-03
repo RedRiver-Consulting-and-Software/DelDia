@@ -1,13 +1,24 @@
 <div class="min-h-screen flex flex-col">
-  <app-top-navbar></app-top-navbar> <!-- Top Navbar -->
+  <!-- Top Navbar -->
+  <app-top-navbar></app-top-navbar>
+
   <div class="flex flex-1">
+    <mat-sidenav-container [ngClass]="{'min-w-fit': opened, 'min-w-12 2xl:min-w-14': !opened}"
+      class="flex border-t border-gray-200">
+      <!-- Side Menu -->
+      <mat-sidenav #sidenav mode="side" [(opened)]="opened">
+        <app-side-menu></app-side-menu>
+      </mat-sidenav>
+    </mat-sidenav-container>
 
-    <div class="bg-white border-t border-gray-300 w-fit">
-      <app-side-menu></app-side-menu> <!-- Side Menu -->
-    </div>
-
-    <main class="flex-1">
-      <router-outlet></router-outlet> <!-- Main view -->
+    <main class="w-full relative">
+      <!-- Toggle side menu button -->
+      <app-svg #toggleIcon (click)="toggleSidenav(sidenav, toggleIcon)" icon="arrowRightCircle"
+        class="toggle-button text-iris top-4 left-[-2.75rem] 2xl:top-5 2xl:-left-12 hover:text-royalBlue h-9 w-9 2xl:h-10 2xl:w-10 cursor-pointer"
+        [isToggleButton]="true">
+      </app-svg>
+      <!-- Router view -->
+      <router-outlet></router-outlet>
     </main>
   </div>
 </div>

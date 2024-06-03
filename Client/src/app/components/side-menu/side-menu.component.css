@@ -7,3 +7,32 @@ a.active li {
   color: white;
   pointer-events: none;
 }
+
+.max-h-0 {
+  max-height: 0;
+}
+
+.max-h-1000 {
+  max-height: 1000px;
+}
+
+.transition-max-height {
+  transition: max-height 0.2s ease-in-out;
+}
+
+.rotate-90 {
+  transform: rotate(90deg);
+}
+
+.mat-sidenav-container {
+  display: flex;
+  transition: max-width 0.3s ease;
+}
+
+.container-opened {
+  max-width: 250px; /* Width when opened */
+}
+
+.container-closed {
+  max-width: 50px; /* Width when closed */
+}

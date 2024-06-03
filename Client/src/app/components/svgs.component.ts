@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ElementRef, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -68,6 +68,12 @@ import { CommonModule } from '@angular/common';
       [class]="class + ' fill-current stroke-current'">
         <path d="M13,12 L16.5,12 C16.7761424,12 17,12.2238576 17,12.5 C17,12.7761424 16.7761424,13 16.5,13 L13,13 L13,16.5 C13,16.7761424 12.7761424,17 12.5,17 C12.2238576,17 12,16.7761424 12,16.5 L12,13 L8.5,13 C8.22385763,13 8,12.7761424 8,12.5 C8,12.2238576 8.22385763,12 8.5,12 L12,12 L12,8.5 C12,8.22385763 12.2238576,8 12.5,8 C12.7761424,8 13,8.22385763 13,8.5 L13,12 Z M3,5.5 C3,4.11928813 4.11928813,3 5.5,3 L19.5,3 C20.8807119,3 22,4.11928813 22,5.5 L22,19.5 C22,20.8807119 20.8807119,22 19.5,22 L5.5,22 C4.11928813,22 3,20.8807119 3,19.5 L3,5.5 Z M4,5.5 L4,19.5 C4,20.3284271 4.67157288,21 5.5,21 L19.5,21 C20.3284271,21 21,20.3284271 21,19.5 L21,5.5 C21,4.67157288 20.3284271,4 19.5,4 L5.5,4 C4.67157288,4 4,4.67157288 4,5.5 Z"/></svg>
 
+      <!-- Arrow left circle icon -->
+      <svg *ngSwitchCase="'arrowRightCircle'" fill="none" xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24" [class]="class + ' fill-current'">
+        <rect/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12ZM13.7071 8.29289C14.0976 8.68342 14.0976 9.31658 13.7071 9.70711L11.4142 12L13.7071 14.2929C14.0976 14.6834 14.0976 15.3166 13.7071 15.7071C13.3166 16.0976 12.6834 16.0976 12.2929 15.7071L9.5554 12.9696C9.0199 12.4341 9.0199 11.5659 9.55541 11.0304L12.2929 8.29289C12.6834 7.90237 13.3166 7.90237 13.7071 8.29289Z"/>
+      </svg>
 
       <!-- Default - plus svg-->
       <svg *ngSwitchDefault xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" [class]="class">
@@ -78,4 +84,17 @@ import { CommonModule } from '@angular/common';
 export class SvgComponent {
   @Input() icon: string = '';
   @Input() class: string = '';
+  @Input() isToggleButton: boolean = false;
+
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
+
+  toggleRotation(isOpened: boolean) {
+    if (this.isToggleButton) {
+      if (isOpened) {
+        this.renderer.removeClass(this.el.nativeElement, 'rotated');
+      } else {
+        this.renderer.addClass(this.el.nativeElement, 'rotated');
+      }
+    }
+  }
 }

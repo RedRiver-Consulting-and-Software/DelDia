@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { SvgComponent } from "../svgs.component";
 import { SvgLogoComponent } from '../logo-svg.component';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-top-navbar',
@@ -10,7 +11,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     RouterLink,
     RouterLinkActive,
     SvgComponent,
-    SvgLogoComponent
+    SvgLogoComponent,
+    MatToolbarModule
   ],
   templateUrl: './top-navbar.component.html',
   styleUrl: './top-navbar.component.css'

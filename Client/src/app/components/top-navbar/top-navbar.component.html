@@ -1,12 +1,14 @@
 <!-- Top Navbar -->
-<Nav
-  class="w-full h-fit px-6 py-2 bg-white shadow-lg 2xl:shadow-xl shadow-indigo-500/10 flex flex-row justify-center items-center">
+<mat-toolbar class="custom-toolbar">
+  <Nav
+    class="w-full h-fit bg-white shadow-lg 2xl:shadow-xl shadow-indigo-500/10 flex flex-row justify-center items-center">
 
-  <a routerLink="/" class="flex items-center my-3">
-    <app-logo icon="logoIcon" class="w-8 h-8 2xl:w-11 2xl:h-11">
-    </app-logo>
-    <app-logo icon="logoText" class="h-8 ml-1 2xl:h-11">
-    </app-logo>
-  </a>
+    <a routerLink="/" class="flex items-center my-3">
+      <app-logo icon="logoIcon" class="w-8 h-8 2xl:w-11 2xl:h-11 ">
+      </app-logo>
+      <app-logo icon="logoText" class="h-8 ml-1 2xl:h-11 text-darkGray hover:text-iris">
+      </app-logo>
+    </a>
 
-</Nav>
+  </Nav>
+</mat-toolbar>

@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SvgComponent } from "./components/svgs.component";
 import { TopNavbarComponent } from './components/top-navbar/top-navbar.component';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
+import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 
 @Component({
     selector: 'app-root',
@@ -19,9 +20,18 @@ import { SideMenuComponent } from './components/side-menu/side-menu.component';
         HttpClientModule,
         SvgComponent,
         TopNavbarComponent,
-        SideMenuComponent
+        SideMenuComponent,
+        MatSidenavModule,
     ]
 })
 export class AppComponent {
+    opened: boolean = true;
+
+    //Toggle button rotation
+    toggleSidenav(sidenav: MatSidenav, toggleIcon: SvgComponent) {
+    sidenav.toggle();
+    this.opened = !this.opened;
+    toggleIcon.toggleRotation(this.opened);
+    }
 
 }
