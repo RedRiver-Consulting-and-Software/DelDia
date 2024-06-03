@@ -1,0 +1,37 @@
+.new-list-button {
+  left: 40px;
+  top: 50px;
+  width: 133px;
+  height: 97px;
+  transform: rotate(0deg);
+  border-radius: 10px;
+  border: 2px solid #606060;
+  background-color: #F3F4F6;
+  color: #43526D;
+  border: 2px solid black;
+  cursor: pointer;
+  font-size: 18px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 510;
+  transition: background-color 0.3s ease;
+  position: relative; /* Keep position relative */
+  resize: none;
+  transform: rotate(0deg);
+  margin-bottom: 10px;
+  padding-top: 25px; /* Add padding-top to move text down */
+  box-sizing: border-box; /* Ensure padding doesn't affect the size */
+  text-align: center; /* Center the text horizontally */
+}
+
+.new-list-button:hover {
+  background-color: lightgrey;
+}
+
+.icon2 {
+  position: absolute;
+  top: 0;
+  margin-left: 40px;
+  margin-top: 20px;
+}
+
+  

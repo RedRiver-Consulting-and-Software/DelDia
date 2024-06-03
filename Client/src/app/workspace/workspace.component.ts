@@ -4,11 +4,12 @@ import { BoardService } from '../services/board.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SvgComponent } from '../components/svgs.component';
+import { NewBoardComponent } from '../new-board/new-board.component';
 
 @Component({
   selector: 'app-workspace',
   standalone: true,
-  imports: [CommonModule, RouterModule, SvgComponent],
+  imports: [CommonModule, RouterModule, SvgComponent, NewBoardComponent],
   templateUrl: './workspace.component.html',
   styleUrl: './workspace.component.css'
 })
