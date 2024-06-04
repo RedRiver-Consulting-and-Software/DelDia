@@ -29,9 +29,10 @@
           </div>
         </a>
         }
-        <div (click)="openModal()" class="cursor-pointer">Create a New Board</div>
+
+
       </div>
     </div>
   </div>
-      <app-new-board class="new-board-button"></app-new-board>
+  <app-new-board (click)="openModal()" class="new-board-button cursor-pointer"></app-new-board>
 </div>

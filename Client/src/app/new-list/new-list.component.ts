@@ -1,11 +1,13 @@
 // src/app/new-list/new-list.component.ts
 
 import { Component, Output, EventEmitter } from '@angular/core';
-import { NewListModel } from '../model/board'; // Ensure this path is correct
+import { NewListModel } from '../model/board';
+import { SvgComponent } from '../components/svgs.component';
 
 @Component({
   selector: 'app-new-list',
   standalone: true,
+  imports: [SvgComponent],
   templateUrl: './new-list.component.html',
   styleUrls: ['./new-list.component.css']
 })
