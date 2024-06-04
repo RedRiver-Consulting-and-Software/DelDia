@@ -1,9 +1,8 @@
-<div class="flex flex-row gap-6 w-full">
-  <!-- <p class="font-medium">Board route: {{ boardId }}</p> -->
+<div class="flex flex-row gap-6 w-auto mt-10 ml-10 2xl:mt-12 2xl:ml-12">
   <div *ngIf="board">
     <p>{{ board.title }}. {{ board.description }}</p>
     <br>
-    <div cdkDropList cdkDropListOrientation="horizontal" [id]="'list-' + board.id" [cdkDropListData]="board.lists"
+    <div cdkDropList cdkDropListOrientation="horizontal" [id]="'board-' + board.id" [cdkDropListData]="board.lists"
       (cdkDropListDropped)="dropGroup($event)">
       <!-- List Start -->
       <div class="dragdropList-list flex gap-4 flex-row pr-4 pb-4">
@@ -26,15 +25,15 @@
           </div>
 
           <!-- Cards start -->
-          <div class="flex flex-col gap-4 flex-grow" cdkDropList [id]="'list-' + list.id" [cdkDropListData]="list.cards"
-            (cdkDropListDropped)="dropCard($event)" [cdkDropListConnectedTo]="getConnectedList()">
+          <div class="flex flex-col gap-4 flex-grow min-h-8" cdkDropList [id]="'list-' + list.id"
+            [cdkDropListData]="list.cards" (cdkDropListDropped)="dropCard($event)"
+            [cdkDropListConnectedTo]="getConnectedList()">
 
             <div *ngFor="let card of list.cards" cdkDrag [cdkDragData]="card"
               class="bg-gray-100 rounded-md px-6 py-4 cursor-pointer hover:shadow-md">
               <h4 class="font-medium">{{ card.title }}</h4>
               <p>{{ card.description }}</p>
             </div>
-
           </div>
           <!-- Cards end -->
 
