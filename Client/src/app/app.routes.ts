@@ -3,7 +3,6 @@ import { Routes } from '@angular/router';
 import { WorkspaceComponent } from './workspace/workspace.component';
 import { BoardDisplayComponent } from './board-display/board-display.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { NewBoardComponent } from './new-board/new-board.component';
 
 export const routes: Routes = [
     {
