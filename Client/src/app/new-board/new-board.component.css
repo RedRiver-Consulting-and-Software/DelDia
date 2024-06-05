@@ -1,7 +1,8 @@
 .new-board-button {
   padding: 100px 50px;
   color: #43526D;
-  border: 2px solid black;
+  border: 2px solid  #43526D;
+  background-color: #F3F4F6;
   border-radius: 20px;
   cursor: pointer;
   font-size: 18px;
